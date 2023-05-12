@@ -33,6 +33,11 @@ $(document).ready(function () {
                             $("#groupTTDrop").removeClass("disabled");
                             $(".gp").removeClass("active");
 
+                            $(".gp").click(function (e) { 
+                                e.preventDefault();
+                                $(this).addClass("active");
+                            });
+
                             $("#wekDayTTDrop").removeClass("disabled");
                             $(".wd").removeClass("active");
 
@@ -50,6 +55,8 @@ $(document).ready(function () {
                                 $(this).addClass("active");
                                 //alert($(".wk.active").html())
                             });
+
+
                         break
                     default:
 
@@ -63,14 +70,14 @@ $(document).ready(function () {
     }
 
     function fillDrop(contID, dataArr, bindClass){
-        dataArr.forEach((element, ind) => {
-            if (element != "") {
+        for(var element in dataArr){
+            if (dataArr[element] !== "") {
                 $(contID).html(
                     $(contID).html() + 
-                    '<li><a class="dropdown-item '+bindClass+'" index="'+ind+'" href="#">' + element + '</a></li>'
+                    '<li><a class="dropdown-item '+bindClass+'" index="'+element+'" href="#">' + dataArr[element] + '</a></li>'
                     );
-            }
-        });
+            }            
+        };
     }
 
     ajReqData(null, 1);

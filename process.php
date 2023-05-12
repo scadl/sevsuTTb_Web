@@ -20,23 +20,30 @@ class resPonseStruct {
 }
 $resPonse = new resPonseStruct;
 
-
-const GPROW = 4;
+// Group names row number
+const GP_ROW = 4;
+const DAY_COLS = 7;
+Const DAY_ROWS = 8;
 
 foreach($ss->getWorksheetIterator() as $Sh){
-    //$page->title = $Sh->getTitle();
     $resPonse->pages[] = $Sh->getTitle();
 }
 
 if(isset($_GET['weekN'])){
     $ws = $ss->getSheetByName($_GET['weekN']);
     $topCol = $ws->getHighestColumn();
-    $resPonse->groups = $ws->rangeToArray("A".GPROW.":".$topCol.GPROW, "", false, false, false)[0];
+    $resPonse->groups = 
+        $ws->rangeToArray("A".GP_ROW.":A".$topCol.GP_ROW, "", false, false, true)[GP_ROW];
 }
 
 if(isset($_GET['gpN']) && isset($_GET['gpCol']) && isset($_GET['weekN'])){
     $ws = $ss->getSheetByName($_GET['weekN']);
-    $resPonse->timetable = $ws->rangeToArray("A1:A3", "", false, false, false)
+    //GP_ROW + 1 + $_GET["wkDay"]*DAY_ROWS
+    $colNumDem = $ws->getColumnDimension($_GET['gpCol']);
+    $colNum = $colNumDem->getXfIndex();
+    //$colEnd = $ws->getColumnDimensionByColumn($colNum + DAY_COLS)->getColumnIndex();
+    $resPonse->timetable = array($colNum, $colEnd);
+        //$ws->rangeToArray($_GET['gpCol'].(GP_ROW+1).":".$_GET['gpCol'].(GP_ROW+9), "", false, false, true);
 }
 
 print(json_encode($resPonse));
