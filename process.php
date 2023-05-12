@@ -4,14 +4,13 @@ error_reporting(E_ERROR);
 
 require 'vendor/autoload.php';
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xls\Worksheet;
-
 $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xlsx");
 $reader->setReadDataOnly(TRUE);
 
 $ss = $reader->load("ionmo_22_o_m.xlsx");
 
+// response struct php object
+// https://www.php.net/manual/en/language.oop5.basic.php
 class resPonseStruct {
     public $pages = array();
     public $groups = array();
@@ -20,11 +19,13 @@ class resPonseStruct {
 }
 $resPonse = new resPonseStruct;
 
-// Group names row number
-const GP_ROW = 4;
-const DAY_COLS = 7;
-Const DAY_ROWS = 8;
+// Calc coordibates
+const GP_ROW = 4;       // Group names row number
+const DAY_COLS = 7;     // How many cols in one day
+Const DAY_ROWS = 8;     // How many rows in one day
+const HEAD_PAD = 3;     // Margin rows between groups and ttimttable 
 
+// https://phpoffice.github.io/PhpSpreadsheet/classes/PhpOffice-PhpSpreadsheet-Spreadsheet.html#method_getWorksheetIterator
 foreach($ss->getWorksheetIterator() as $Sh){
     $resPonse->pages[] = $Sh->getTitle();
 }
@@ -34,16 +35,15 @@ if(isset($_GET['weekN'])){
     $topCol = $ws->getHighestColumn();
     $resPonse->groups = 
         $ws->rangeToArray("A".GP_ROW.":A".$topCol.GP_ROW, "", false, false, true)[GP_ROW];
+    // https://phpoffice.github.io/PhpSpreadsheet/classes/PhpOffice-PhpSpreadsheet-Worksheet-Worksheet.html#method_rangeToArray
 }
 
-if(isset($_GET['gpN']) && isset($_GET['gpCol']) && isset($_GET['weekN'])){
+if(isset($_GET['gpN']) && isset($_GET['gpColS']) && isset($_GET['weekN'])){
     $ws = $ss->getSheetByName($_GET['weekN']);
-    //GP_ROW + 1 + $_GET["wkDay"]*DAY_ROWS
-    $colNumDem = $ws->getColumnDimension($_GET['gpCol']);
-    $colNum = $colNumDem->getXfIndex();
-    //$colEnd = $ws->getColumnDimensionByColumn($colNum + DAY_COLS)->getColumnIndex();
-    $resPonse->timetable = array($colNum, $colEnd);
-        //$ws->rangeToArray($_GET['gpCol'].(GP_ROW+1).":".$_GET['gpCol'].(GP_ROW+9), "", false, false, true);
+    $wkStep = $_GET["wkDay"]*DAY_ROWS;
+    $resPonse->timetable = $ws->rangeToArray(
+            $_GET['gpColS'].(GP_ROW+HEAD_PAD+$wkStep).":".$_GET['gpColE'].(GP_ROW+HEAD_PAD+$wkStep+DAY_ROWS), 
+            "", false, false, false);
 }
 
 print(json_encode($resPonse));

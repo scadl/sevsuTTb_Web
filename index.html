@@ -4,61 +4,78 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>sevsuTimeTable</title>
-        <meta name="description" content="Базовый парсер расписаний СевГУ">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
 
-        <link href="./vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-        <script src="./vendor/twbs/bootstrap/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-        <link href="./vendor/twbs/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" crossorigin="anonymous">
-        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="./mod/index.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>sevsuTimeTable</title>
+  <meta name="description" content="Базовый парсер расписаний СевГУ">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+
+  <link href="./vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="./vendor/twbs/bootstrap/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <link href="./vendor/twbs/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="./mod/index.js"></script>
+</head>
+
+<body>
+  <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#"> 
-                <img src="./mod/sevsuTT.svg" height="24px">
-                Расписания СевГУ
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="./mod/sevsuTT.svg" height="24px">
+        Расписания СевГУ
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="weekTTDrop" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              № Недели
             </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="weekTTDrop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      № Недели
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="weekTT">                   
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle disabled" href="#" id="groupTTDrop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Группа
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="groupTT">                   
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle disabled" href="#" id="wekDayTTDrop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      День Недели
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="wekDayTT">                   
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-        
-    </body>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="weekTT">
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle disabled" href="#" id="groupTTDrop" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Группа
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="groupTT">
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle disabled" href="#" id="wekDayTTDrop" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              День Недели
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="wekDayTT">
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- https://getbootstrap.com/docs/5.3/components/buttons/ -->
+      <button class="btn btn-outline-danger" id="tbClear">Сброс</button>
+      
+    </div>
+  </nav>
+
+  <table class="table table-bordered table-hover">
+    <thead id="tHead" class="table-secondary">
+    </thead>
+    <tbody id="tBody">
+    </tbody>
+  </table>
+
+</body>
+
 </html>
