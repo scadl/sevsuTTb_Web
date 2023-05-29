@@ -85,6 +85,8 @@ $(document).ready(function () {
 
                         break;
                 }
+
+                $("#moDate").text(resP.moDate);
             }
         });
     }

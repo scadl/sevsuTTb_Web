@@ -16,8 +16,10 @@ class resPonseStruct {
     public $groups = array();
     public $timetable = array();
     public $weekDays = array("Понедельник","Вторник","Среда","Четверг","Пятница","Суббота");
+    public $moDate = "";
 }
 $resPonse = new resPonseStruct;
+$resPonse->moDate = date("d.m.y G:i", filectime("ionmo_22_o_m.xlsx"));
 
 // Calc coordibates
 const GP_ROW = 4;       // Group names row number
