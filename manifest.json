@@ -1,0 +1,29 @@
+{
+  "name": "Расписания СевГУ",
+  "short_name": "sevsuTTb_Web",
+  "start_url": "/sevsuTTb_Web",
+  "description": "Расписания СевГУ (Веб-Версия)",
+  "background_color": "#212529",
+  "display": "standalone",
+  "theme_color": "#212529",
+  "icons": [
+    {
+      "src": "/sevsuTTb_Web/mod/sevsuTT_x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+	{
+      "src": "/sevsuTTb_Web/mod/sevsuTT_x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+	{
+      "src": "/sevsuTTb_Web/mod/sevsuTT_x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "related_applications": [{
+    "platform": "web"
+  }]
+}
